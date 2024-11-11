@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,8 +19,8 @@
     <div class="login form">
       <header>Вход</header>
       <form action="#">
-        <input type="text" placeholder="Введите email" required>
-        <input type="password" placeholder="Введите пароль" required>
+        <input type="text" placeholder="Введите email" id="login-email" required>
+        <input type="password" placeholder="Введите пароль" id="login-password" required>
         <input type="button" class="button" value="Войти">
       </form>
       <div class="signup">
@@ -30,7 +30,6 @@
       </div>
     </div>
 
-    <!-- Registration Form with additional fields -->
     <div class="registration form">
       <header>Регистрация</header>
       <form action="#">
@@ -41,10 +40,8 @@
         <input type="number" placeholder="Ваш возраст" min="14" required>
         <input type="text" placeholder="Город проживания" required>
         
-        <!-- Список хобби теперь выпадающий -->
         <label for="user-hobbies-input">Выберите хобби:</label>
         <select id="user-hobbies-input" required>
-          <!-- Опции будут добавляться через JavaScript -->
         </select>
         
         <input type="file" placeholder="Загрузите фото (необязательно)">
@@ -59,46 +56,16 @@
   </div>
 
   <script>
-    // Доступные хобби
     const availableHobbies = [
-    'Астрономия',
-'Баскетбол',
-'Бег',
-'йсджампинг',
-'Велоспорт',
-'Волейбол',
-'Вышивание',
-'Головоломки',
-'Гончарное дело',
-'Грибоводство',
-'Изучение иностранных языков',
-'Йога',
-'Киберспорт',
-'Коллекционирование',
-'Кондитерское дело',
-'Настольные игры',
-'Охота',
-'Парашютный спорт',
-'Пение и игра на музыкальных инструментов',
-'Пивоварение',
-'Плавание',
-'Приготовление блюд',
-'Программирование',
-'Пчеловодство',
-'Рисование',
-'Робототехника',
-'Рыбалка',
-'Скалолазание',
-'Сноубординг',
-'Теннис',
-'Философия',
-'Фитнес',
-'Фотографирование',
-'Футбол',
-'Хоккей'
+      'Астрономия', 'Баскетбол', 'Бег', 'Бейсджампинг', 'Велоспорт', 'Волейбол',
+      'Вышивание', 'Головоломки', 'Гончарное дело', 'Грибоводство', 'Изучение иностранных языков',
+      'Йога', 'Киберспорт', 'Коллекционирование', 'Кондитерское дело', 'Настольные игры',
+      'Охота', 'Парашютный спорт', 'Пение и игра на музыкальных инструментах', 'Пивоварение',
+      'Плавание', 'Приготовление блюд', 'Программирование', 'Пчеловодство', 'Рисование',
+      'Робототехника', 'Рыбалка', 'Скалолазание', 'Сноубординг', 'Теннис', 'Философия',
+      'Фитнес', 'Фотографирование', 'Футбол', 'Хоккей'
     ];
 
-    // Заполнение выпадающего списка хобби
     function loadHobbies() {
       const hobbiesSelect = document.getElementById('user-hobbies-input');
       availableHobbies.forEach(hobby => {
@@ -109,7 +76,6 @@
       });
     }
 
-    // Обработка регистрационной формы
     document.querySelector('.registration .button').addEventListener('click', function() {
       const email = document.querySelector('.registration input[type="email"]').value;
       const password = document.querySelector('.registration input[type="password"]:nth-child(2)').value;
@@ -121,7 +87,6 @@
       const pictureFile = document.querySelector('.registration input[type="file"]');
       const file = pictureFile.files[0];
 
-      // Проверки на обязательные поля
       if (!email || !password || !confirmPassword || !fullName || !age || !city || !hobbies) {
         alert("Пожалуйста, заполните все обязательные поля.");
         return;
@@ -137,7 +102,6 @@
         return;
       }
 
-      // Сохранение данных в localStorage
       localStorage.setItem('userEmail', email);
       localStorage.setItem('userPassword', password);
       localStorage.setItem('userName', fullName);
@@ -145,21 +109,32 @@
       localStorage.setItem('userCity', city);
       localStorage.setItem('userHobbies', hobbies);
 
-      // Если фото есть, сохраняем его
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          // Сохранение изображения в локальное хранилище
           localStorage.setItem('uploadedImage', e.target.result);
         };
         reader.readAsDataURL(file);
       }
 
       alert('Регистрация выполнена успешно!');
-      document.getElementById('check').checked = false; // Перейти к форме входа
+      document.getElementById('check').checked = false;
     });
 
-    // Загрузка хобби при загрузке страницы
+    document.querySelector('.login .button').addEventListener('click', function() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      const storedEmail = localStorage.getItem('userEmail');
+      const storedPassword = localStorage.getItem('userPassword');
+
+      if (email === storedEmail && password === storedPassword) {
+        window.location.href = 'str_lk.html';
+      } else {
+        alert('Неверные данные');
+      }
+    });
+
     loadHobbies();
   </script>
 </body>
