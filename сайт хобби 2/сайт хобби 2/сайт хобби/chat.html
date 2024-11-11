@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат</title>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-database.js"></script>
+</head>
+<body>
+    <h2>Общий чат</h2>
+    <div id="chat-container"></div>
+    <input type="text" id="messageInput" placeholder="Введите сообщение">
+    <button onclick="sendMessage()">Отправить</button>
+
+    <script>
+        // Вставьте ваш firebaseConfig
+        const firebaseConfig = {
+            apiKey: "AIzaSyAR07wZqPdPa2cAPeb2TkMKz7R6M0Cz5oc",
+            authDomain: "site-hobby.firebaseapp.com",
+            databaseURL: "https://site-hobby-default-rtdb.firebaseio.com",
+            projectId: "site-hobby",
+            storageBucket: "site-hobby.firebasestorage.app",
+            messagingSenderId: "366065238276",
+            appId: "1:366065238276:web:1ad4229a83fb31b193d051",
+        };
+        
+        // Инициализация Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        console.log('Firebase инициализирован:', app);
+        const database = firebase.database();
+        console.log('База данных инициализирована:', database);
+
+        // Ссылка на базу данных сообщений
+        const dbRef = database.ref('messages');
+
+        // Отправка сообщения
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim(); // Удаляем лишние пробелы
+
+            if (message) {
+                console.log('Отправляем сообщение:', message);
+                dbRef.push().set({
+                    message: message,
+                    timestamp: Date.now()
+                }).then(() => {
+                    console.log('Сообщение успешно отправлено');
+                    messageInput.value = ''; // Очищаем поле после отправки
+                }).catch((error) => {
+                    console.error('Ошибка при отправке сообщения:', error);
+                });
+            } else {
+                console.log('Сообщение пустое');
+            }
+        }
+
+        // Отображение сообщений в реальном времени
+        dbRef.on('child_added', (snapshot) => {
+            const messageData = snapshot.val();
+            console.log('Получено новое сообщение:', messageData);
+            const messageContainer = document.getElementById('chat-container');
+
+            // Создаем элемент для сообщения
+            const messageElement = document.createElement('p');
+            messageElement.textContent = messageData.message;
+            messageContainer.appendChild(messageElement);
+        });
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>

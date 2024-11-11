@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #466869;
+      padding: 20px;
+      text-align: center;
+      color: white; 
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    header h2 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      text-align: center;
+      background-color:  #466869;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 20px; 
+      border-radius: 20px; 
+      background-color: #344d4e; 
+      transition: background-color 0.3s; 
+    }
+    .container1 {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 30px;
+      text-align: left;
+      background-color: #d0d0d0;
+      border-radius: 10px;
+    }
+    .profile-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profile-info img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      margin-right: 60px;
+      cursor: pointer;
+    }
+    .profile-details {
+      display: flex;
+      flex-direction: column;
+      font-size: 18px;
+      color: #466869;
+    }
+    .additional-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .additional-info p {
+      margin: 5px 20px;
+      color: #000000;
+    }
+    .logout-btn, .edit-btn {
+      padding: 8px 16px;
+      background-color: #466869;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    .logout-btn:hover, .edit-btn:hover {
+      background-color:  #466869;
+    }
+    .edit-form {
+      display: none;
+      margin-top: 20px;
+    }
+    .edit-form input, .edit-form textarea, .edit-form select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .edit-form button {
+      padding: 10px 20px;
+      background-color:  #466869;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .edit-form button:hover {
+      background-color: #466869;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .close:hover, .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .delete-btn {
+      position: absolute;
+      bottom: 15px;
+      right: 35px;
+      padding: 10px 20px;
+      background-color: #466869;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .delete-btn:hover {
+      background-color: #466869;
+    }
+    .buttons-container {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ЕДИНОМЫШЛЕННИКИ</h1>
+    <h2>поиск людей с похожим хобби</h2>
+  </header>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="chat.html">Чаты</a>
+    <a href="str_lk.html">Личный кабинет</a>
+  </nav>
+  
+  <div class="container1">
+    <div class="buttons-container">
+      <button class="edit-btn" onclick="EditForm()">Редактировать</button>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
+    </div>
+
+    <div class="profile-info">
+      <img src="userProfilePic" alt="Profile Picture" id="profile-pic" onclick="openModal('profile-pic')">
+      <div class="profile-details">
+        <h3 id="user-name"></h3> 
+        <div class="additional-info">
+          <p><strong>Город:</strong> <span id="user-city"></span></p>
+          <p><strong>Возраст:</strong> <span id="user-age"></span></p>
+          <p><strong>Хобби:</strong> <span id="user-hobbies"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-form" id="edit-form">
+    <input type="file" id="profile-pic-input" accept="image/*">
+    <input type="text" id="user-name-input" placeholder="ФИО">
+    <input type="text" id="user-city-input" placeholder="Город">
+    <input type="number" id="user-age-input" placeholder="Возраст">
+    
+    <!-- Список хобби теперь выпадающий -->
+    <label for="user-hobbies-input">Выберите хобби:</label>
+    <select id="user-hobbies-input">
+      <!-- Опции будут добавляться через JavaScript -->
+    </select>
+    
+    <div class="error" id="error-message"></div>
+    <button onclick="saveProfile()">Сохранить</button>
+  </div>
+
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modal-img">
+  </div>
+
+  <script>
+    // Доступные хобби
+    const availableHobbies = [
+    'Астрономия',
+'Баскетбол',
+'Бег',
+'йсджампинг',
+'Велоспорт',
+'Волейбол',
+'Вышивание',
+'Головоломки',
+'Гончарное дело',
+'Грибоводство',
+'Изучение иностранных языков',
+'Йога',
+'Киберспорт',
+'Коллекционирование',
+'Кондитерское дело',
+'Настольные игры',
+'Охота',
+'Парашютный спорт',
+'Пение и игра на музыкальных инструментов',
+'Пивоварение',
+'Плавание',
+'Приготовление блюд',
+'Программирование',
+'Пчеловодство',
+'Рисование',
+'Робототехника',
+'Рыбалка',
+'Скалолазание',
+'Сноубординг',
+'Теннис',
+'Философия',
+'Фитнес',
+'Фотографирование',
+'Футбол',
+'Хоккей'
+
+    ];
+
+    // Заполнение выпадающего списка хобби
+    function loadHobbies() {
+      const hobbiesSelect = document.getElementById('user-hobbies-input');
+      availableHobbies.forEach(hobby => {
+        const option = document.createElement('option');
+        option.value = hobby;
+        option.textContent = hobby;
+        hobbiesSelect.appendChild(option);
+      });
+    }
+
+    // Получение данных из localStorage
+    const userName = localStorage.getItem('userName');
+    const userCity = localStorage.getItem('userCity');
+    const userAge = localStorage.getItem('userAge');
+    const userHobbies = localStorage.getItem('userHobbies');
+    const userProfilePic = localStorage.getItem('uploadedImage'); // Получение фото
+
+    if (!userName || !userCity || !userHobbies) {
+      window.location.href = 'login.html'; // Если нет данных, перенаправляем на страницу логина
+    } else {
+      document.getElementById('user-name').textContent = userName;
+      document.getElementById('user-city').textContent = userCity;
+      document.getElementById('user-age').textContent = userAge;
+      document.getElementById('user-hobbies').textContent = userHobbies;
+      document.getElementById('profile-pic').src = userProfilePic;
+    }
+
+    // Функция для редактирования профиля
+    function EditForm() {
+      const editForm = document.getElementById('edit-form');
+      editForm.style.display = editForm.style.display === 'block' ? 'none' : 'block';
+      document.getElementById('error-message').textContent = ''; // Очистить сообщение об ошибке
+    }
+
+    // Функция для открытия модального окна с изображением
+    function openModal(image) {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      modal.style.display = "block";
+      modalImg.src = image;
+    }
+
+    // Закрытие модального окна
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = "none";
+    }
+
+    // Сохранение изменений в профиле
+    function saveProfile() {
+      const newProfilePic = document.getElementById('profile-pic-input').files[0]; // Получаем новое фото
+      const newUserName = document.getElementById('user-name-input').value;
+      const newUserCity = document.getElementById('user-city-input').value;
+      const newUserAge = document.getElementById('user-age-input').value;
+      const newUserHobbies = document.getElementById('user-hobbies-input').value;
+
+      // Проверки на пустые поля и минимальный возраст
+      if (!newUserName || !newUserCity || !newUserHobbies || !newUserAge) {
+        document.getElementById('error-message').textContent = "Все поля должны быть заполнены!";
+        return;
+      }
+
+      if (newUserAge < 14) {
+        document.getElementById('error-message').textContent = "Возраст должен быть не менее 14 лет!";
+        return;
+      }
+
+      // Сохраняем данные в localStorage
+      localStorage.setItem('userName', newUserName);
+      localStorage.setItem('userCity', newUserCity);
+      localStorage.setItem('userAge', newUserAge);
+      localStorage.setItem('userHobbies', newUserHobbies);
+
+      // Обновляем изображение профиля
+      if (newProfilePic) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          localStorage.setItem('uploadedImage', e.target.result); // Сохраняем изображение
+          document.getElementById('profile-pic').src = e.target.result;
+        };
+        reader.readAsDataURL(newProfilePic);
+      }
+
+      // Обновляем текстовую информацию
+      document.getElementById('user-name').textContent = newUserName;
+      document.getElementById('user-city').textContent = newUserCity;
+      document.getElementById('user-age').textContent = newUserAge;
+      document.getElementById('user-hobbies').textContent = newUserHobbies;
+
+      // Закрываем форму редактирования
+      EditForm();
+    }
+
+    // Функция для выхода из профиля
+    function logout() {
+      localStorage.clear(); // Очищаем localStorage
+      window.location.href = 'login.html'; // Перенаправляем на страницу логина
+    }
+
+    // Загрузка хобби при загрузке страницы
+    loadHobbies();
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-database.js"></script>
+<script>
+ const firebaseConfig = {
+  apiKey: "AIzaSyAR07wZqPdPa2cAPeb2TkMKz7R6M0Cz5oc",
+  authDomain: "site-hobby.firebaseapp.com",
+  databaseURL: "https://site-hobby-default-rtdb.firebaseio.com",
+  projectId: "site-hobby",
+  storageBucket: "site-hobby.firebasestorage.app",
+  messagingSenderId: "366065238276",
+  appId: "1:366065238276:web:1ad4229a83fb31b193d051",
+  measurementId: "G-46QCNF05ED"
+};
+
+  // Инициализируйте Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+</script>
+
+
+<div id="chat-container"></div>
+<input type="text" id="messageInput" placeholder="Введите сообщение">
+<button onclick="sendMessage()">Отправить</button>

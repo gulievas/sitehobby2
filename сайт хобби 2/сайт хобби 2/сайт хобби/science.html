@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Спорт - Хобби Платформа</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #466869;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    header h2 {
+      margin: 0;
+      color: white;
+      text-align: center;
+    }
+    nav {
+      text-align: center;
+      background-color:  #466869;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 20px; 
+    border-radius: 20px; 
+    background-color: #344d4e; 
+    transition: background-color 0.3s; 
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      color: #333;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .sport-list {
+      display: flex;
+      flex-direction: column; 
+    }
+    .sport-item {
+      width: 100%; 
+      margin: 10px 0;
+      text-align: left;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+    .sport-item h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color:  #91b9ab;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color:  #91b9ab;
+    }
+    footer {
+      background-color: #466869;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+    footer p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ЕДИНОМЫШЛЕННИКИ</h1>
+    <h2>поиск людей с похожим хобби</h2>
+  </header>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="chat.html">Чаты</a>
+    <a href="str_lk.html">Личный кабинет</a>
+  </nav>
+
+  <div class="container">
+    <section id="sports">
+      <h2>Выберите ваш вид спорта</h2>
+      <div class="sport-list">
+        <div class="sport-item" onclick="openSportPage('program')">
+          <h3>Программирование</h3>
+        </div>
+        <div class="sport-item" onclick="openSportPage('robotics')">
+          <h3>Робототехника</h3>
+        </div>
+        <div class="sport-item" onclick="openSportPage('astronomy')">
+          <h3>Астрономия</h3>
+        </div>
+        <div class="sport-item" onclick="openSportPage('esports')">
+          <h3>Киберспорт</h3>
+        </div>
+        
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function openSportPage(sport) {
+      let url;
+      switch (sport) {
+        case 'program':
+          url = 'program.html';
+          break;
+        case 'robotics':
+          url = 'robotics.html';
+          break;
+        case 'astronomy':
+          url = 'astronomy.html';
+          break;
+        case 'esports':
+          url = 'esports.html';
+          break;
+        default:
+          url = 'default.html';
+      }
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
