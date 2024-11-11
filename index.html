@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хобби Платформа</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    header {
+      background-color: #466869;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    header h2 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      text-align: center;
+      background-color:  #466869;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 20px; 
+    border-radius: 20px; 
+    background-color: #344d4e; 
+    transition: background-color 0.3s; 
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .hobby-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .hobby-item {
+      flex: 1 1 calc(33.33% - 20px); /* Три колонки в строке */
+      margin: 10px;
+      text-align: center; 
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: white;
+    }
+    .hobby-item img {
+      max-width: 100%;
+      border-radius: 10px;
+      height: 200px;
+      object-fit: cover;
+    }
+    footer {
+      background-color: #466869;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+    footer p {
+      margin: 0;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color:  #91b9ab;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color:  #91b9ab;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ЕДИНОМЫШЛЕННИКИ</h1>
+    <h2>поиск людей с похожим хобби</h2>
+  </header>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="chat.html">Чаты</a>
+    <a href="str_lk.html">Личный кабинет</a>
+  </nav>
+
+  <div class="container">
+    <!-- Раздел хобби -->
+    <section id="hobbies">
+      <h2>Выберите ваше хобби</h2>
+      <div class="hobby-list">
+        <div class="hobby-item" onclick="openHobbyPage('sport')">
+          <img src="https://avatars.mds.yandex.net/i?id=6063f572ff7c31243fb2d631a8a38abc568a2b40-9849146-images-thumbs&n=13" alt="Спорт">
+          <h3>Спорт</h3>
+          <p1>Спортивные хобби связаны с физической активностью и требуют хорошей физической подготовки, координации и выносливости. Они помогают поддерживать здоровье, развивать силу, ловкость, выносливость и командный дух.</p1>
+        </div>
+        <div class="hobby-item" onclick="openHobbyPage('extreme')">
+          <img src="https://avatars.mds.yandex.net/i?id=6f7ba6f4b6556f6c36cbc0cd04f977e1d800ccceca2d7f86-12926369-images-thumbs&n=13" alt="Экстремальные">
+          <h3>Экстремальные</h3>
+          <p1>Экстремальные хобби связаны с высокими рисками и адреналином. Они привлекают людей, которые любят острые ощущения и готовы испытывать свои границы.</p1>
+        </div>
+        <div class="hobby-item" onclick="openHobbyPage('creativity')">
+          <img src="https://avatars.mds.yandex.net/i?id=bde50d29fb4dacab11ac4432e40f08e9bffe4d12-10143227-images-thumbs&n=13" alt="Творческие">
+          <h3>Творческие</h3>
+          <p1>Творческие хобби позволяют выразить себя через искусство и ремесло. Это идеальные занятия для тех, кто хочет развивать воображение, эстетический вкус и навыки рукоделия.</p1>
+        </div>
+         <div class="hobby-item" onclick="openHobbyPage('science')">
+            <img src="https://avatars.mds.yandex.net/i?id=1d49770b79f876d846fcd2f761ddc6145c225d37-11374844-images-thumbs&n=13" alt="Наука">
+            <h3>Наука</h3>
+            <p1>Эти хобби связаны с технологиями, инженерией и наукой. Они подходят людям с аналитическим складом ума и интересом к исследованию и созданию новых вещей.</p1>
+         </div>
+         <div class="hobby-item" onclick="openHobbyPage('intelligence')">
+              <img src="https://avatars.mds.yandex.net/i?id=f999c135572fb21d644856a4621457bd4a6f5f6e-12423030-images-thumbs&n=13" alt="Интеллектуальные">
+              <h3>Интеллектуальные</h3>
+              <p1>Эти хобби направлены на развитие умственных способностей, логического мышления и стратегического планирования. Они помогают тренировать мозг и часто связаны с решением сложных задач.</p1>
+         </div>
+         <div class="hobby-item" onclick="openHobbyPage('collecting')">
+                <img src="https://avatars.mds.yandex.net/i?id=5efd5f80bc86a032f5af5310a83e8de5b2e7a178-10677603-images-thumbs&n=13" alt="Коллекционирование">
+                <h3>Коллекционирование</h3>
+                <p1>Коллекционирование — это процесс собирания и хранения предметов, которые имеют особую ценность для коллекционера.</p1>
+          </div>
+          <div class="hobby-item" onclick="openHobbyPage('gardening')">
+            <img src="https://avatars.mds.yandex.net/i?id=3127c4bcb8f8ad87e6ae66e6f21e87732c06429b-13281163-images-thumbs&n=13" alt="Садоводство">
+            <h3>Садоводство и природа</h3>
+            <p1>Эти хобби связаны с заботой о растениях и животном мире. Они помогают укрепить связь с природой, улучшить окружающую среду и получать удовольствие от выращивания чего-то своими руками.</p1>
+      </div>
+      <div class="hobby-item" onclick="openHobbyPage('cooking')">
+        <img src="https://avatars.mds.yandex.net/i?id=07ce834c8b1b69272e69cabbe39be0f134bbfebf-9829431-images-thumbs&n=13" alt="Кулинария">
+        <h3>Кулинария</h3>
+        <p1>Кулинарные хобби связаны с приготовлением пищи и напитков. Эти занятия помогают развивать вкус и навыки кулинарного мастерства, а также могут приносить удовольствие и пользу окружающим.</p1>
+      </div>
+      </div>
+    </section>
+    <!-- Контакты -->
+    <section id="contact">
+      <h2>Контакты</h2>
+      <p>Свяжитесь с нами по почте: <strong>info@hobbyplatform.com</strong></p>
+      <p>Или по телефону: <strong>+123 456 7890</strong></p>
+    </section>
+  </div>
+  
+  <script>
+    function openHobbyPage(hobby) {
+      let url;
+      switch (hobby) {
+        case 'sport':
+          url = 'sport.html';
+          break;
+        case 'extreme':
+          url = 'extreme.html';
+          break;
+        case 'creativity':
+          url = 'creativity.html';
+          break;
+          case 'science':
+          url = 'science.html';
+          break;
+        case 'intelligence':
+          url = 'intelligence.html';
+          break;
+          case 'collecting':
+          url = 'collecting.html';
+          break;
+        case 'gardening':
+          url = 'gardening.html';
+          break;
+        case 'cooking':
+          url = 'cooking.html';
+          break;
+        default:
+          url = 'default.html';
+      }
+      window.open(url, '_blank');
+  }
+  </script>
+</body>
+</html>
